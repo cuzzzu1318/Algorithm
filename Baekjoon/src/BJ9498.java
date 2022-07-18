@@ -4,16 +4,19 @@ import java.util.*;
 public class BJ9498 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int a = sc.nextInt();
-		int b = sc.nextInt();
-		int x = a*(b%10);
-		int y = a*(b%100/10);
-		int z = a*(b%1000/100);
-		
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(z);
-		System.out.println(x+y*10+z*100);
-
+		int score = sc.nextInt();
+		if(score>100||score<0) {
+			System.out.println("Error!");
+		}else if(score<=100&&score>=90) {
+			System.out.println("A");
+		}else if(score<=89&&score>=80) {
+			System.out.println("B");
+		}else if(score<=79&&score>=70) {
+			System.out.println("C");
+		}else if(score<=69&&score>=60) {
+			System.out.println("D");
+		}else {
+			System.out.println("F");
+		}
 	}
 }
