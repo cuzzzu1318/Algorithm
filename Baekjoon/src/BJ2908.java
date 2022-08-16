@@ -15,6 +15,7 @@ public class BJ2908 {
 		String str = sc.nextLine();
 		String[] arr = str.split(" ");
 		
+		//첫번째 수 변환
 		int num = 1;
 		int a = 0;
 		for(String i: arr[0].split("")) {
@@ -22,6 +23,7 @@ public class BJ2908 {
 			num*=10;
 		}
 		
+		//두번째 수 변환
 		num = 1;
 		int b = 0;
 		for(String i: arr[1].split("")) {
@@ -29,6 +31,7 @@ public class BJ2908 {
 			num*=10;
 		}
 		
+		//대소 비교 후 출력
 		if(a>b) {
 			System.out.println(a);
 		}else {
