@@ -1,4 +1,5 @@
 //ACM Craft 
+//결과 맞게 나오나 실패로 떠서 
 
 package aug_22;
 import java.io.BufferedReader;
