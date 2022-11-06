@@ -19,7 +19,7 @@ public class BJ1157 {
 			arr[word.charAt(i)-97]++;
 		}
 		
-		//최댓값 찾기, 같으면 ?의 아스키코드 63
+		//최댓값 찾기, 같으면 ?의 아스키코드 63aaaa
 		int max = 0;
 		char cmax = 63;
 		for(int i = 0; i<26;i++) {
