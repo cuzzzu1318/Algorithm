@@ -33,11 +33,9 @@ class N_Queen {
 			v.set(level, n);
 			boolean bool = true;
 			for (int i = 0; i < level; i++) {
-
 				if (v.get(i) == v.get(level) || level - i == Math.abs(v.get(i) - v.get(level))) {
 					bool = false;
 				}
-				
 			}
 			if(bool) {
 				bt(level+1);
