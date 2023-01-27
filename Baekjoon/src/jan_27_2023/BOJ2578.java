@@ -1,20 +1,19 @@
 package jan_27_2023;
 
-/*
- * 난이도 : 
- * 아이디어: 
+/* 빙고판이 주어지고 숫자를 불러줌.
+ * 몇번째 숫자를 불렀을 때에 3빙고 완성인지 출력
+ * 난이도 : 실버 4
+ * 아이디어: 다 돌려봄..
  * 시간복잡도:
  * */
-
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class BOJ2578{
-	
+public class BOJ2578 {
+
 	static boolean isBingo(boolean[][] fill) {
 		int[] wid = new int[5];
 		int[] len = new int[5];
@@ -22,81 +21,72 @@ public class BOJ2578{
 		Arrays.fill(wid, 0);
 		Arrays.fill(len, 0);
 		Arrays.fill(dig, 0);
-		
-		for(int i =0;i<5;i++) {
-			for(int j =0;j<5;j++) {
-				if(fill[i][j]) {
-					System.out.println("fill");
+
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (fill[i][j]) {
 					wid[i]++;
 					len[j]++;
-					if(i==j) {
+					if (i == j) {
 						dig[0]++;
-					}else if(i+j==4) {
+					}
+					if ((i + j) == 4) {
 						dig[1]++;
 					}
 				}
 			}
 		}
 		int cnt = 0;
-		for(int n : wid) {
-			if(n==5) {
-				cnt++;
-			}
-		}for(int n : len) {
-			if(n==5) {
-				cnt++;
-			}
-		}for(int n : dig) {
-			if(n==5) {
+		for (int n : wid) {
+			if (n == 5) {
 				cnt++;
 			}
 		}
-		if(cnt==3) {
+		for (int n : len) {
+			if (n == 5) {
+				cnt++;
+			}
+		}
+		for (int n : dig) {
+			if (n == 5) {
+				cnt++;
+			}
+		}
+		if (cnt >= 3) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
-   public static void main(String[] args) throws NumberFormatException, IOException {
-      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-      int[][] bingo = new int[5][5];
-      for(int i = 0;i<5;i++) {
-    	  String[] s = br.readLine().split(" ");
-    	  for(int j = 0;j<5;j++) {
-    		  bingo[i][j] = Integer.parseInt(s[j]);
-    	  }
-      }
-      
-      boolean[][] fill = new boolean[5][5];
-      loop:
-      for(int i = 0;i<5;i++) {
-    	  String[] s = br.readLine().split(" ");
-    	  for(int j = 0;j<5;j++) {
-    		  int n = Integer.parseInt(s[j]);
-    		  for(int k = 0;k<5;k++) {
-    			  for(int l = 0;l<5;l++) {
-    				  if(bingo[k][l]==n) {
-    					  fill[k][l]=true;
-    					  for(boolean [] arr : fill) {
-    						  for(boolean b : arr) {
-    							  if(b) {
-    								  System.out.print("f ");
-    							  }else {
-    								  System.out.print("n ");
-    							  }
-    						  }
-    						  System.out.println();
-    					  }
-    					  if(isBingo(fill)) {
-    						  System.out.println(i*5+j);
-    						  break loop;
-    					  }
-    				  }
-    			  }
-    		  }
-    	  }
-      }
-      
-   }
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int[][] bingo = new int[5][5];
+		for (int i = 0; i < 5; i++) {
+			String[] s = br.readLine().split(" ");
+			for (int j = 0; j < 5; j++) {
+				bingo[i][j] = Integer.parseInt(s[j]);
+			}
+		}
+
+		boolean[][] fill = new boolean[5][5];
+		loop: for (int i = 0; i < 5; i++) {
+			String[] s = br.readLine().split(" ");
+			for (int j = 0; j < 5; j++) {
+				int n = Integer.parseInt(s[j]);
+				for (int k = 0; k < 5; k++) {
+					for (int l = 0; l < 5; l++) {
+						if (bingo[k][l] == n) {
+							fill[k][l] = true;
+							if (isBingo(fill)) {
+								System.out.println((i * 5) + j + 1);
+								break loop;
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
 }
