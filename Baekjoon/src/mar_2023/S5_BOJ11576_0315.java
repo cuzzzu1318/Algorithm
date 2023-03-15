@@ -1,8 +1,9 @@
 package mar_2023;
 
 /*  A진법을 B진법으로 바꾸기
- * 난이도 : 
- * 아이디어: 
+ * 난이도 : 실버5
+ * 아이디어: 단순 divide랑 mod인데 머리가 안굴러가
+ * ㅠㅠㅠ
  * 시간복잡도:
  * 소요 시간: 
  * */
@@ -12,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class S5_BOJ11576_0315 {
    public static void main(String[] args) throws NumberFormatException, IOException {
@@ -29,7 +31,15 @@ public class S5_BOJ11576_0315 {
     	  int n = (int) (Integer.parseInt(s[i-1])*Math.pow(A, m-i));
     	  dec+=n;
       }
-      System.out.println(dec);
-      
+      ArrayList<Integer> ans = new ArrayList<>();
+      while(dec>0) {
+    	  ans.add(dec%B);
+    	  dec/=B;
+      }
+      for(int i = ans.size()-1;i>=0;i--) {
+    	  bw.write(ans.get(i)+" ");
+      }
+      bw.flush();
+      bw.close();
    }
 }
