@@ -1,6 +1,6 @@
 package mar_2023;
 
-/*  
+/*  A진법을 B진법으로 바꾸기
  * 난이도 : 
  * 아이디어: 
  * 시간복잡도:
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class BOJ11576 {
+public class S5_BOJ11576_0315 {
    public static void main(String[] args) throws NumberFormatException, IOException {
       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
       BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
