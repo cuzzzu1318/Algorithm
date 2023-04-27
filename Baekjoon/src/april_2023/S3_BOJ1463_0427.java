@@ -37,7 +37,7 @@ public class S3_BOJ1463_0427 {
 			}
 			cnt = Math.min(cnt, dp(n-1)+1);
 			//1을 뺀 경우
-			//세가지 중 최솟값 리턴 및 dp 배열에 저장
+			//세가지 중 최솟값 리턴 및 dp 배열에 저장dd
 			d[n] = cnt;
 			return cnt;
 		}
