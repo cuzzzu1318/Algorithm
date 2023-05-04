@@ -2,27 +2,38 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringBuilder sb = new StringBuilder();
-	
+
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		int n = Integer.parseInt(br.readLine());
-		int[] arr = new int[n+1];
-		Arrays.fill(arr, 5);
-		arr[0] = 0;
-		arr[1] = 1;
-		for(int i = 1;i<=Math.sqrt(n);i++) {
-			for(int j = i*i;j<=n;j++) {
-				arr[j] = Math.min(arr[j-i*i]+1, arr[j]);
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
+
+		Queue<Integer> q = new LinkedList<>();
+		
+		for (int i = 1; i <= N; i++) {
+			q.offer(i);
+		}
+		int cnt = 1;
+		sb.append("<");
+		while (q.size()>1) {
+			if (cnt == K) {
+				sb.append(q.poll()+", ");
+				cnt = 1;
+			} else {
+				q.add(q.poll());
+				cnt++;
 			}
 		}
-		System.out.println(arr[n]);
+		sb.append(q.poll()+">");
+		System.out.println(sb);
+
 	}
-	
-	
+
 }
