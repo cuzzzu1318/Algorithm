@@ -24,7 +24,6 @@ public class G4_BOJ9019_0516 {
 			q.add(A);
 			v.add("");
 			visit.add(A);
-			int cnt = 0;
 			loop:
 			while (!q.isEmpty()) {
 				int size = q.size();
@@ -45,7 +44,7 @@ public class G4_BOJ9019_0516 {
 							break;
 						case 1:
 							next = n - 1;
-							if (next == 0) {
+							if (n== 0) {
 								next = 9999;
 							}
 							nextF+="S";
@@ -58,9 +57,6 @@ public class G4_BOJ9019_0516 {
 							next = n / 10 + (n % 10) * 1000;
 							nextF+="R";
 						}
-						if(visit.contains(next)) {
-							System.out.println("contatin");
-						}
 						if (!visit.contains(next)) {
 							q.add(next);
 							visit.add(next);
@@ -68,7 +64,6 @@ public class G4_BOJ9019_0516 {
 						}
 					}
 				}
-				cnt++;
 			}
 		}
 		System.out.println(sb);
