@@ -21,11 +21,12 @@ public class G5_BOJ16234_0523 {
 		int L = Integer.parseInt(st.nextToken());
 		int R = Integer.parseInt(st.nextToken());
 		int[][] map = new int[N + 2][N + 2];
-		boolean[][] v = new boolean[N + 2][N + 2];
+		//지역의 인구수를 저장하는 지도 배열. 패딩을 위해 +2 해줌.
 
 		for (int i = 0; i < N + 2; i++) {
 			Arrays.fill(map[i], -1);
 		}
+		//패딩한 지역 -1로 채움. -> 사용하지 않는 인덱스
 
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
@@ -33,62 +34,71 @@ public class G5_BOJ16234_0523 {
 				map[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		//입력 완료
+		
+		int days = 0;
+		//소요 일 수 
+		
+		
+		while (true) {
+			//계속 반복. 인구이동이 일어나지 않으면 종료.
+			boolean[][] v = new boolean[N + 2][N + 2];
+			boolean canOpen = false;
+			//인구이동이 일어날 수 있는지 확인하는 Flag
 
-		int days = 2001;
-
-		for (int i = 1; i <= N; i++) {
-			for (int j = 1; j <= N; j++) {
-				if (!v[i][j]) {
-					ArrayList<idx> region = new ArrayList<>();
-					int cnt = 1;
-					int sum = map[i][j];
-					int day = 0;
-					Queue<idx> q = new LinkedList<>();
-					idx start = new idx(i, j);
-					region.add(start);
-					q.add(start);
-					v[i][j] = true;
-					while (!q.isEmpty()) {
-						int sz = q.size();
-						boolean canOpen = false;
-						for (int s = 0; s < sz; s++) {
+			for (int i = 1; i <= N; i++) {
+				for (int j = 1; j <= N; j++) {
+					//모든 좌표를 확인
+					if (!v[i][j]) {
+						//방문하지 않았다면 BFS실행. 
+						Queue<idx> q = new LinkedList<>();
+						ArrayList<idx> union = new ArrayList<>();
+						q.add(new idx(i, j));
+						v[i][j] = true;
+						int cnt = 1;
+						//연합의 나라 수
+						int sum = map[i][j];
+						//연합의 인구 수 총합
+						union.add(new idx(i,j));
+						//시작 국가부터 연합에 포함
+						while (!q.isEmpty()) {
 							idx cur = q.poll();
 							for (int d = 0; d < 4; d++) {
+								//방향벡터를 따라 탐색
 								int x = cur.x + dx[d];
 								int y = cur.y + dy[d];
-
-								int diff = Math.abs(map[cur.x][cur.y] - map[x][y]);
+								int diff = Math.abs(map[x][y] - map[cur.x][cur.y]);
+								//인구수 차이
 								if (map[x][y] == -1) {
 									continue;
 								}
 								if (!v[x][y] && diff >= L && diff <= R) {
+									//방문하지 않았고 인구수 차이가 L이상 R이하라면
 									v[x][y] = true;
-									idx next = new idx(x, y);
-									q.add(next);
-									region.add(next);
-									sum += map[x][y];
-									cnt++;
 									canOpen = true;
+									//인구이동이 일어났다고 표시
+									cnt++;
+									sum+=map[x][y];
+									union.add(new idx(x,y));
+									//연합에 넣어주고 인구수와 카운트 증가
+									q.add(new idx(x,y));
 								}
 							}
-
 						}
-						if (canOpen) {
-							day++;
+						for(idx c : union) {
+							//연합의 인구수 조정
+							map[c.x][c.y] = sum/cnt; 
 						}
-					}
-					System.out.println(day);
-					for (idx r : region) {
-						map[r.x][r.y] = sum / cnt;
-					}
-					if(day>0) {
-						days = Math.min(days, day);
 					}
 				}
 			}
-		}
-		if(days==2001) {
-			days = 0;
+			if(canOpen) {
+				//인구이동이 일어났다면 일 수 증가
+				days++;
+			}else {
+				//일어나지 않았다면 반복문 종료
+				break;
+			}
 		}
 		System.out.println(days);
 	}
