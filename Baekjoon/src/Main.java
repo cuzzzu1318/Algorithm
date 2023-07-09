@@ -1,8 +1,7 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -16,29 +15,13 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
-		int[] nums = new int[N];
+		int[] arr = new int[N];
 		st = new StringTokenizer(br.readLine(), " ");
-		for (int i = 0; i < N; i++) {
-			nums[i] = Integer.parseInt(st.nextToken());
-		}
-		Arrays.sort(nums);
 		for(int i= 0;i<N;i++) {
-			makeArr(nums, i, 1, "");
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		System.out.println(sb);
-
+		Arrays.sort(arr);
 	}
 
-	static void makeArr(int[] num,int n, int m, String str) {
-		str += Integer.toString(num[n]) + " ";
-		if (m == M) {
-			sb.append(str + "\n");
-			return;
-		}
-		for (int i = n; i < N; i++) {
-			makeArr(num, i, m + 1, str);
-			
-		}
-	}
 }
