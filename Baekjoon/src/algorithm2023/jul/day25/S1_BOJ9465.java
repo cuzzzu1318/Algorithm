@@ -4,10 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class S1_BOJ9465 {
-
-	static int[] dx = { 0, 1, 0, -1 };
-	static int[] dy = { -1, 0, 1, 0 };
-
 	static int n;
 
 	static StringBuilder sb = new StringBuilder();
@@ -17,16 +13,19 @@ public class S1_BOJ9465 {
 		int T = Integer.parseInt(br.readLine());
 		for (int t = 0; t < T; t++) {
 			n = Integer.parseInt(br.readLine());
-			int max = 0;
 			String[] s1 = br.readLine().split(" ");
 			String[] s2 = br.readLine().split(" ");
 			int prev1 = Integer.parseInt(s1[0]);
 			int prev2 = Integer.parseInt(s2[0]);
 			
 			for (int i = 1; i < n; i++) {
+				//0번째 행
 				int a = Integer.parseInt(s1[i]);
+				//1번째 행
 				int b = Integer.parseInt(s2[i]);
+				//0번째 행 i-1번째 열
 				int temp = prev1;
+				//왼쪽 대각선 스티커 + 자기 자신을 뗐을 때 vs 자기 자신을 떼지 않고 왼쪽 스티커 뗐을 때 비교
 				prev1 = Math.max(prev2 + a, prev1);
 				prev2 = Math.max(temp + b, prev2);
 
