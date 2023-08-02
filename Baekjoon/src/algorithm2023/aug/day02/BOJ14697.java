@@ -6,7 +6,9 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class BOJ14697 {
-	static int N, room[], dp[];
+	static int N;
+	static int[] room = new int[3];
+	static boolean dp[];
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
@@ -14,10 +16,16 @@ public class BOJ14697 {
 			room[i] = Integer.parseInt(st.nextToken());
 		}
 		N = Integer.parseInt(st.nextToken());
-		dp = new int[N+1];
-		for(int i =1;i<=N;i++) {
-			
+		dp = new boolean[N+1];
+		dp[0] = true;
+		for(int i =0;i<3;i++) {
+			for(int j = room[i] ;j<=N;j++) {
+				if(dp[j-room[i]]) {
+					dp[j] = true;
+				}
+			}
 		}
+		System.out.println(dp[N]?1:0);
 		
 	}
 }
