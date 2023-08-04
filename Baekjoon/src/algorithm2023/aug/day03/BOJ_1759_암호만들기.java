@@ -9,7 +9,7 @@ public class BOJ_1759_암호만들기 {
 	static int L,C;
 	static char src[], target[];
 	//모음의 개수를 세기 위해 모음을 배열로 생성
-	static char[] gather = {'i','e','a','o','u'};
+	static char[] vowel = {'i','e','a','o','u'};
 	
 	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws Exception {
@@ -60,7 +60,7 @@ public class BOJ_1759_암호만들기 {
 		for(int i= 0;i<L;i++) {
 			for(int j = 0;j<5;j++) {
 				//모음이라면 카운트
-				if(target[i]==gather[j])cntG++;
+				if(target[i]==vowel[j])cntG++;
 			}
 		}
 		//모음의 개수가 1개 이상이고 전체-모음 -> 자음의 개수가 2개 이상이면 true

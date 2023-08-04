@@ -26,10 +26,10 @@ public class BOJ_1062_가르침 {
 			System.out.println(N);
 		} else {
 			alph['a' - 'a'] = true;
-			alph['c' - 'c'] = true;
-			alph['t' - 't'] = true;
-			alph['i' - 'i'] = true;
-			alph['n' - 'n'] = true;
+			alph['c' - 'a'] = true;
+			alph['t' - 'a'] = true;
+			alph['i' - 'a'] = true;
+			alph['n' - 'a'] = true;
 			find(0, 5);
 			System.out.println(max);
 		}
@@ -37,15 +37,17 @@ public class BOJ_1062_가르침 {
 	}
 
 	static void find(int index, int cnt) {
-		int cntW = 0;
-		loop: for (int i = 0; i < N; i++) {
-			for (int j = 4; j < word[i].length() - 4; j++) {
-				if (!alph[word[i].charAt(j) - 'a'])
-					continue loop;
+		if (cnt == K) {
+			int cntW = 0;
+			loop: for (int i = 0; i < N; i++) {
+				for (int j = 4; j < word[i].length() - 4; j++) {
+					if (!alph[word[i].charAt(j) - 'a'])
+						continue loop;
+				}
+				cntW++;
 			}
-			cntW++;
+			max = Math.max(max, cntW);
 		}
-		max = Math.max(max, cntW);
 
 		if (cnt < K) {
 			for (int j = index + 1; j < 26; j++) {
@@ -54,7 +56,6 @@ public class BOJ_1062_가르침 {
 					find(j, cnt + 1);
 					alph[j] = false;
 				}
-
 			}
 		}
 
