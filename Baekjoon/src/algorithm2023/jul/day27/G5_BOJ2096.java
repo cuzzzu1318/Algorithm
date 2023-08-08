@@ -16,7 +16,7 @@ public class G5_BOJ2096 {
 		//각 행마다 입력과 동시에 연산
 		for (int i = 0; i < N; i++) {
 			String[] s = br.readLine().split(" ");
-			dp(i, s);
+			dp(s);
 		}
 		
 		//마지막 행의 값들 중 최대, 최소 구하기
@@ -29,7 +29,7 @@ public class G5_BOJ2096 {
 		System.out.println(ans1 + " " + ans2);
 	}
 
-	static void dp(int i, String[] s) {
+	static void dp(String[] s) {
 		//값의 간섭을 막기 위해 별도의 배열 생성
 		int[] maxRet = new int[3];
 		int[] minRet = new int[3];

@@ -63,7 +63,7 @@ public class BOJ_1759_암호만들기 {
 				if(target[i]==vowel[j])cntG++;
 			}
 		}
-		//모음의 개수가 1개 이상이고 전체-모음 -> 자음의 개수가 2개 이상이면 true
+		//모음의 개수가 1개 이상이고 (문자열의 길이)-(모음 개수) -> 자음의 개수가 2개 이상이면 true
 		if(cntG>0&&L-cntG>1)return true;
 		return false;
 	}
