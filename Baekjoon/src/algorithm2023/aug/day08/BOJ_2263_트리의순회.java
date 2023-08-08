@@ -3,37 +3,44 @@ package algorithm2023.aug.day08;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class BOJ_2263_트리의순회 {
 	static int N;
-	static ArrayList<String> in = new ArrayList<>();
-	static ArrayList<String> post = new ArrayList<>();
+	static int[] in;
+	static int[] post;
+	static int[] idx;
 	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		StringTokenizer st1 = new StringTokenizer(br.readLine(), " ");
-		for (int i = 0; i < N; i++) {
-			in.add(st.nextToken());
-			post.add(st1.nextToken());
+		in = new int[N+1];
+		post = new int[N+1];
+		idx = new int[N+1];
+		for (int i = 1; i <= N; i++) {
+			in[i] = Integer.parseInt(st.nextToken());
+			post[i] = Integer.parseInt(st1.nextToken());
+			idx[in[i]] = i;
 		}
-		String head = post.get(N-1);
-		int idx = in.indexOf(head);
-		ArrayList<String> left = new ArrayList<>();
-		ArrayList<String> right = new ArrayList<>();
-		System.arraycopy(in, 0, left, 0, idx);
-		System.arraycopy(in, idx+1, right, 0, in.size());
-		System.out.println(left);
-		System.out.println(right);
-		
+		pre(1,N,1,N);
+		System.out.println(sb);
 		
 	}
-	static void pre(ArrayList<String> left,ArrayList<String> right, int head ) {
-		
+	
+	static void pre(int il,int ir, int pl, int pr) {
+		System.out.print(post[pr]);
+		if(il>=ir)return;
+		int head = idx[post[pr]];
+		int lsize = head-il;
+		int rsize = ir-head;
+		pre(il,head-1,pl,pl+lsize);
+		pre(head+1,ir, pl+lsize+1,pr);
 	}
+	
 	
 	
 
