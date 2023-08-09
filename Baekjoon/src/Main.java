@@ -1,49 +1,47 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Stack;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String args[]) throws IOException{
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-
-        for(int tc = 1; tc<= 10; tc++) {
-            int N = Integer.parseInt(br.readLine());
-            char[] arr = new char[N];
-            String str = br.readLine();
-            for(int i = 0; i < N; i++)
-                arr[i]=str.charAt(i);
-
-            Deque<Character> stack = new ArrayDeque<>();
-            boolean check = true;
-            for(int i = 0; i < N; i++) {
-                if(arr[i] == '(' || arr[i] == '{' || arr[i] == '<'||arr[i]=='[') {
-                    stack.push(arr[i]);
-                }
-                else {
-                    if(!stack.isEmpty()) {
-                        char now = stack.pop();
-                        if((arr[i] == ')' && now != '(')|| (arr[i] == '}' && now !='{') || (arr[i] == '>' && now !='<')||(arr[i]==']'&&now!='[')) {
-                            System.out.println(i+" "+arr[i]+" "+now);
-                        	check = false;
-                            
-                            break;
-                        }
-                    }
-                    else {
-                        check = false;
-                        break;
-                    }
-
+    public static void main(String[] args) throws IOException{
+        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
+        
+        Long[] start_time = new Long[N];
+        Long[] end_time = new Long[N];
+        boolean[] the_end = new boolean[N];
+        for(int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            st.nextToken();
+            start_time[i] = Long.parseLong(st.nextToken());
+            end_time[i] = Long.parseLong(st.nextToken());
+        }
+        
+        Arrays.sort(start_time);
+        Arrays.sort(end_time);
+        int cnt = 0;
+        int max = 0;
+        int end_idx = 0;
+        for(int i = 0; i < N; i++) {
+            Long now = start_time[i];
+            cnt++;
+            
+            
+            for(int j = i-1; j >= end_idx; j--) {
+                if(now >= end_time[j] && !the_end[j]) {
+                    the_end[j] = true;
+                    cnt--;
+                    end_idx++;
                 }
             }
-            if(check) System.out.println("#" + tc +" " + "1");
-            else System.out.println("#" + tc + " "+"0");
+            if(cnt > max) max = cnt;
         }
+        System.out.println(max);
+        
     }
+
 }
