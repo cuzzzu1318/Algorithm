@@ -19,11 +19,12 @@ public class BOJ_18258_큐2 {
 		for (int i = 0; i < N; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 			func(st);
-			
+
 		}
 		System.out.println(sb);
+
 	}
-	
+
 	static void func(StringTokenizer st) {
 		String func = st.nextToken();
 		switch (func) {
@@ -33,30 +34,32 @@ public class BOJ_18258_큐2 {
 			e++;
 			break;
 		case "pop":
-			if(s<e) {
+			if (s <= e) {
 				sb.append(list.get(s++)).append("\n");
-			}else {
+			} else {
 				sb.append(-1).append("\n");
 			}
 			break;
 		case "size":
-			sb.append(e-s).append("\n");
+			sb.append(e - s + 1).append("\n");
 			break;
 		case "empty":
-			if(s==e)sb.append(1).append("\n");
-			else sb.append(0).append("\n");
+			if (s > e)
+				sb.append(1).append("\n");
+			else
+				sb.append(0).append("\n");
 			break;
 		case "front":
-			if(s<e) {
+			if (s <= e) {
 				sb.append(list.get(s)).append("\n");
-			}else {
+			} else {
 				sb.append(-1).append("\n");
 			}
 			break;
 		case "back":
-			if(s<e) {
+			if (s <= e) {
 				sb.append(list.get(e)).append("\n");
-			}else {
+			} else {
 				sb.append(-1).append("\n");
 			}
 			break;
