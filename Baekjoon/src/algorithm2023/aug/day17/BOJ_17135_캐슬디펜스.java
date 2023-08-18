@@ -52,39 +52,47 @@ public class BOJ_17135_캐슬디펜스 {
 		comb(idx + 1, cnt);
 	}
 
-	static boolean dfs(int y, int x, int[][] map2, int depth, int r, boolean[][] v) {
+	static void bfs(int y, int x, int[][] map2, int depth, int r, boolean[][] v) {
 
-		if (depth == D)
-			return false;
-
-		for (int d = 0; d < 3; d++) {
-			int ny = y + dx[d];
-			int nx = x + dx[d];
-			if (isValid(ny, nx, r)) {
-				if (v[ny][nx])
-					continue;
-				if (map2[ny][nx] != 0) {
-					map2[ny][nx] = -1;
-					return true;
-				}
-				v[ny][nx] = true;
-				if(dfs(ny, nx, map2, depth + 1, r, v)) {
-					return true;
-				}
-				v[ny][nx] = false;
-			}
-		}
-		return false;
+		
 	}
 
 	static int game(int r, int[][] map2) {
-
-		if (r == 0)
+		if (r == 0) {
 			return 0;
+		}
+
 		int cnt = 0;
 		for (int i = 0; i < M; i++) {
 			if (archer[i]) {
-				dfs(r, i, map2, 0, r, new boolean[r][M]);
+				Queue<Idx> q = new LinkedList<>();
+				q.add(new Idx(r, i));
+				int dis = 0;
+				boolean[][] v = new boolean[r][M];
+				loop: while (!q.isEmpty()) {
+					int size = q.size();
+					dis++;
+					if (dis > D)
+						break;
+					for (int s = 0; s < size; s++) {
+						Idx cur = q.poll();
+
+						for (int d = 0; d < 3; d++) {
+							int ny = cur.y + dy[d];
+							int nx = cur.x + dx[d];
+							if (!isValid(ny, nx, r))
+								continue;
+							if (v[ny][nx])
+								continue;
+							q.offer(new Idx(ny, nx));
+							v[ny][nx] = true;
+							if (map2[ny][nx] != 0) {
+								map2[ny][nx] = -1;
+								break loop;
+							}
+						}
+					}
+				}
 			}
 		}
 
