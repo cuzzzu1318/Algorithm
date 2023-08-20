@@ -31,6 +31,7 @@ public class BOJ_17471_게리맨더링 {
 				graph[i][nb] = true;
 			}
 		}
+		
 		for(int i =1;i<bm;i++) {
 			v = new boolean[N];
 			red(i);
@@ -84,7 +85,7 @@ public class BOJ_17471_게리맨더링 {
 				break;
 			}
 		}
-		//첫번째 집단에 대해 탐색
+		//두번째 집단에 대해 탐색
 		Queue<Integer> blue = new LinkedList<>();
 		blue.add(start);
 		v[start]  =true;

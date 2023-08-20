@@ -52,11 +52,6 @@ public class BOJ_17135_캐슬디펜스 {
 		comb(idx + 1, cnt);
 	}
 
-	static void bfs(int y, int x, int[][] map2, int depth, int r, boolean[][] v) {
-
-		
-	}
-
 	static int game(int r, int[][] map2) {
 		if (r == 0) {
 			return 0;

@@ -24,7 +24,6 @@ public class G5_BOJ10026_0515 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		int N = Integer.parseInt(br.readLine());
 		char[][] pic = new char[N + 2][N + 2];
-		//�׸��� �� ����, �е��� ���� �ε����� 2�� �߰�
 		for (int i = 1; i <= N; i++) {
 			char[] s = br.readLine().toCharArray();
 			for (int j = 1; j <= N; j++) {
@@ -35,15 +34,12 @@ public class G5_BOJ10026_0515 {
 		Queue<idx> q = new LinkedList<>();
 		
 		int[] cnt = {0,0};
-		//0��° �ε����� ������ �ƴ� ���, 1��° �ε����� ������ ����� �� ���� ��
 		
 		boolean[][] v = new boolean[N + 2][N + 2];
 		
-		//������ �ƴ� ���
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j <= N; j++) {
 				if(!v[i][j]) {
-					//�ѹ� �湮�� �� ������ ���� ���ϰ� ���� Ž��
 					cnt[0]++;
 					idx idx = new idx(i,j);
 					q.add(idx);
@@ -55,7 +51,6 @@ public class G5_BOJ10026_0515 {
 							int x = cur.x+dx[d];
 							int y = cur.y+dy[d];
 							if(c==pic[x][y]&&!v[x][y]) {
-								//������ �ƴ� ����̹Ƿ� ���� ���� ��츸 Ž��
 								q.add(new idx(x,y));
 								v[x][y] = true;
 							}
@@ -67,9 +62,7 @@ public class G5_BOJ10026_0515 {
 			}
 		}
 		v = new boolean[N + 2][N + 2];
-		//�ٽ� Ž���ؾ� �ϹǷ� �湮�迭 �ʱ�ȭ
 		
-		//������ ���
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j <= N; j++) {
 				if(!v[i][j]) {
@@ -84,7 +77,6 @@ public class G5_BOJ10026_0515 {
 							int x = cur.x+dx[d];
 							int y = cur.y+dy[d];
 							if(isSame(c, pic[x][y])&&!v[x][y]) {
-								//R�� G�� ���� ������ ���� �ϹǷ� ������ �Լ��� ����
 								q.add(new idx(x,y));
 								v[x][y] = true;
 							}
@@ -97,7 +89,6 @@ public class G5_BOJ10026_0515 {
 		System.out.println(cnt[0]+" "+cnt[1]);
 	}
 	static boolean isSame(char c1, char c2) {
-		//R�� G�� ���� ������ �Ǵ��ϴ� �Լ�
 		if(c1=='R'&&c2=='G') {
 			return true;
 		}else if(c1=='G'&&c2=='R') {
