@@ -24,11 +24,11 @@ public class BOJ_15961_회전초밥 {
 			sushi[i] = Integer.parseInt(br.readLine());
 		}
 		
+		count[c]++;
 		for(int i = 0;i<k;i++) {
 			count[sushi[i]]++;
 		}
 		ans = cnt();
-		if(count[c]==0)ans++;
 		
 		int max = 0;
 		
@@ -39,18 +39,16 @@ public class BOJ_15961_회전초밥 {
 			int n = (i+k)%N;
 			count[sushi[old]]--;
 			if(count[sushi[old]]<=0) {
-				if(sushi[old] ==c) {
-					ans++;
-				}
 				ans--;
 				count[sushi[old]] = 0;
 			}
 			count[sushi[n]]++;
 			if(count[sushi[n]]==1) {
-				if(sushi[n]==c) {
-					ans--;
-				}
 				ans++;
+			}
+			if(count[c]==0) {
+				ans++;
+				count[c]=1;
 			}
 			max = Math.max(max, ans);
 			
