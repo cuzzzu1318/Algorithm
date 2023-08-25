@@ -37,7 +37,6 @@ public class BOJ_17281_야구공 {
 		}
 
 		if (idx == 3) {
-			selected[idx] = 0;
 			perm(idx + 1);
 		}
 		for (int i = 1; i < 9; i++) {
