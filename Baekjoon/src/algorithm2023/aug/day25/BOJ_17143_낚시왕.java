@@ -70,7 +70,7 @@ public class BOJ_17143_낚시왕 {
 			//상, 하
 			case 1:
 			case 2:
-				s = s % (R-1)*2;
+				s = s % ((R-1)*2);
 				for(int i = 0;i<s;i++) {
 					//양끝이면 방향 전환
 					
@@ -83,7 +83,7 @@ public class BOJ_17143_낚시왕 {
 				break;
 			case 3:
 			case 4:
-				s = s % (C-1)*2;
+				s = s % ((C-1)*2);
 				for(int i = 0;i<s;i++) {
 					//양끝이면 방향 전환
 					
