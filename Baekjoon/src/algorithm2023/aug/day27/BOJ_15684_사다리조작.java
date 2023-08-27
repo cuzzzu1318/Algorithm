@@ -38,64 +38,55 @@ public class BOJ_15684_사다리조작 {
 		
 	}
 	
+	//사다리 가로선 만드는 함수
 	static void makeLine(int c, int r, int cnt) {
+		//가로선 개수가 3개를 넘으면 탐색 ㄴㄴ
 		if(cnt>3)return;
 		
-		if(c==N) {
+		//오른쪽 끝에 도달하면 한 층 아래로 탐색
+		if(c>=N) {
 			makeLine(1,r+1,cnt);
 			return;
 		}
+		//마지막층까지 탐색 완료한 경우
 		if(r==H+1) {
+			//i번째 사다리가 모두 i에 도착한다면 최소값 갱신
 			if(isValid()) {
-				for(int i= 1;i<=H;i++) {
-					for(int j = 1;j<=N;j++) {
-						if(ladder[i][j]==1)System.out.print(j+" "+i+", ");
-					}
-				}
-				System.out.println();
 				min = Math.min(min, cnt);
 			}
 			return;
 		}
 		
+		//해당 사다리의 해당 층에 아직 선이 연결되어있지 않다면 연결하고 탐색
 		if(ladder[r][c]==0&&ladder[r][c+1]==0) {
 			ladder[r][c]=1;
 			ladder[r][c+1]=2;
-			makeLine(c+1,r,cnt+1);
+			makeLine(c+2,r,cnt+1);
+			//탐색후에는 지워줌
 			ladder[r][c] = 0;
 			ladder[r][c+1]=0;
 		}
+		//연결하지 않은 경우 탐색
 		makeLine(c+1,r,cnt);
 	}
 	
+	//i번째 사다리가 모두 i에 도착하는지 확인하기 위한 함수
 	static boolean isValid() {
-		boolean ret = true;
-		//가로로 탐색
-		
-//		for(int i = 1;i<=H;i++) {
-//			System.out.println(Arrays.toString(ladder[i]));
-//		}
-		
 		for(int i=1 ;i<=N;i++) {
 			int x = i;
 			int y = 1;
-			boolean[][] v = new boolean[H+2][N+1];
-			v[y][x] = true;
 			while(y<=H) {
 				int d = ladder[y][x];
-				int ny = y+dy[d];
+				int ny = y+1;
 				int nx = x+dx[d];
-				
-				if(v[ny][nx]) {
-					ny=y+1;
-					nx=x;
-				}
 				x=nx;
 				y=ny;
-				v[y][x] = true;
 			}
-			if(x!=i)ret = false;
+			if(x!=i){
+					return false;
+			}
+			
 		}
-		return ret;
+		return true;
 	}
 }
