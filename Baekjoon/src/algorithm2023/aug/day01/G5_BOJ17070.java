@@ -3,97 +3,50 @@ package algorithm2023.aug.day01;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class G5_BOJ17070 {
-	static int N, COUNT, house[][];
-	static int[] dy = {0,1,1};
-	static int[] dx = {1,1,0};
+	static int N, COUNT, house[][], dp[][][];
+	static int[] dy = { 0, 1, 1 };
+	static int[] dx = { 1, 1, 0 };
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N= Integer.parseInt(br.readLine());
-		//집과 방문배열
+		N = Integer.parseInt(br.readLine());
+		// 집과 방문배열
 		house = new int[N][N];
-		
-		//입력
-		for(int i = 0;i<N;i++) {
+		//dp에 사용하기 위한 배열 -> 0: -모양 , 1: \모양, 2: |모양
+		dp = new int[N][N][3];
+		// 입력
+		for (int i = 0; i < N; i++) {
 			String[] s = br.readLine().split(" ");
-			for(int j= 0;j<N;j++) {
+			for (int j = 0; j < N; j++) {
 				house[i][j] = Integer.parseInt(s[j]);
 			}
 		}
-		canGo(0,1,0);
-		System.out.println(COUNT);
-	}
-	
-	static void canGo(int y, int x, int d) {
-		//목적지에 도달하면 true;
-		if(y==N-1&&x==N-1) {
-			COUNT++;
-		}else {
-			boolean isEmp = true;
-			switch(d) {
-			case 0:
-				for(int i=0;i<3;i++) {
-					int ny = y+dy[i];
-					int nx = x+dx[i];
-					if(isValid(ny,nx)&&house[ny][nx]==0) {
-						if(i==0) {
-							canGo(ny,nx,i);
-						}
-						
-					}else {
-						isEmp = false;
+		dp[0][1][0] = 1;
+		for(int y= 0;y<N;y++) {
+			for(int x = 2;x<N;x++) {
+				if(house[y][x]==1) continue;
+				dp[y][x][0] = dp[y][x-1][0]+dp[y][x-1][1];
+				if(y>0) {
+					if(house[y-1][x]!=1&&house[y][x-1]!=1) {
+						dp[y][x][1] = dp[y-1][x-1][0]+dp[y-1][x-1][1]+dp[y-1][x-1][2];
 					}
+						dp[y][x][2] = dp[y-1][x][1] + dp[y-1][x][2];
 				}
-				if(isEmp) {
-					canGo(y+dy[1], x+dx[1], 1);
-				}
-				break;
-			case 1:
-				for(int i=0;i<3;i++) {
-					int ny = y+dy[i];
-					int nx = x+dx[i];
-					if(isValid(ny,nx)&&house[ny][nx]==0) {
-						if(i==0) {
-							canGo(ny,nx,i);
-						}
-						if(i==2) {
-							canGo(ny,nx,i);
-						}
-						
-					}else {
-						isEmp = false;
-					}
-				}
-				if(isEmp) {
-					canGo(y+dy[1], x+dx[1], 1);
-				}
-				break;
-			case 2:
-				for(int i=0;i<3;i++) {
-					int ny = y+dy[i];
-					int nx = x+dx[i];
-					if(isValid(ny,nx)&&house[ny][nx]==0) {
-						if(i==2) {
-							canGo(ny,nx,i);
-						}
-						
-					}else {
-						isEmp = false;
-					}
-				}
-				if(isEmp) {
-					canGo(y+dy[1], x+dx[1], 1);
-				}
-				break;
+				
 				
 			}
 		}
+		
+		System.out.println(dp[N-1][N-1][0]+dp[N-1][N-1][1]+dp[N-1][N-1][2]);
 	}
-	
+
 	static boolean isValid(int y, int x) {
-		if(y<0||x<0||y>=N||x>=N)return false;
+		if (y < 0 || x < 0 || y >= N || x >= N||house[y][x]==1)
+			return false;
 		return true;
 	}
-	
+
 }
