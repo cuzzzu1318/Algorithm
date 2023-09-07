@@ -1,6 +1,11 @@
 package algorithm2023.sep.day06;
 
 import java.io.BufferedReader;
+
+/*
+ * N개의 수로 이루어진 배열 중 가장 "큰" 증가하는 부분수열 구하기
+ * DP를 사용한 LIS알고리즘을 길이가 아니라 크기를 저장하여 풀이
+ */
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
