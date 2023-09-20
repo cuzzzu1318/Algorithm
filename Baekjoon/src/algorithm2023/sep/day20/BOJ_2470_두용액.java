@@ -1,4 +1,4 @@
-package algorithm2023.sep.day19;
+package algorithm2023.sep.day20;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,11 +10,13 @@ public class BOJ_2470_두용액 {
 	static StringTokenizer st;
 	static StringBuilder sb = new StringBuilder();
 
-	static int N, liquid[];
+	static int N, liquid[], start, end;
 	
 	public static void main(String[] args) throws Exception {
 		N = Integer.parseInt(br.readLine());
 		liquid = new int[N];
+		start = 0;
+		end = N-1;
 		
 		st = new StringTokenizer(br.readLine());
 		for(int i =0 ;i<N;i++) {
@@ -22,10 +24,13 @@ public class BOJ_2470_두용액 {
 		}
 		
 		Arrays.sort(liquid);
+		System.out.println(Arrays.toString(liquid));
+		binarySearch(start,end);
+		System.out.println(liquid[start]+" "+liquid[end]);
 		
-		for(int i =0 ;i<N;i++) {
-			
-		}
+	}
+	
+	static void binarySearch(int low, int high) {
 		
 	}
 }
