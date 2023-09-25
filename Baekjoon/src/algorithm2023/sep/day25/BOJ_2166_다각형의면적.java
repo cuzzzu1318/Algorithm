@@ -14,11 +14,10 @@ public class BOJ_2166_다각형의면적 {
 	static ArrayList<Node> nodeList = new ArrayList<>();
 	
 	static class Node{
-		int num,x,y;
+		long x,y;
 
-		public Node(int num,int x, int y) {
+		public Node(long x, long y) {
 			super();
-			this.num = num;
 			this.x = x;
 			this.y = y;
 		}
@@ -29,11 +28,24 @@ public class BOJ_2166_다각형의면적 {
 		
 		for(int i =0 ;i<N;i++) {
 			st = new StringTokenizer(br.readLine());
-			int x = Integer.parseInt(st.nextToken());
-			int y = Integer.parseInt(st.nextToken());
-			nodeList.add(new Node(i,x,y));
+			long x = Long.parseLong(st.nextToken());
+			long y = Long.parseLong(st.nextToken());
+			nodeList.add(new Node(x,y));
+		}
+		double ans = 0.0;
+		for(int i = 1;i<N-1;i++) {
+			ans+=shoelace(nodeList.get(i), nodeList.get(i+1));
 		}
 		
+		System.out.printf("%.1f",Math.abs(ans));
 		
+	}
+	
+	static double shoelace(Node b, Node c) {
+		Node a= nodeList.get(0);
+		
+		
+		
+		return ((a.x*b.y + b.x*c.y + c.x*a.y) - (b.x*a.y+c.x*b.y+a.x*c.y))/2.0;
 	}
 }
