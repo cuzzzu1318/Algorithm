@@ -23,9 +23,9 @@ public class BOJ_3273_두수의합 {
 		x = Integer.parseInt(br.readLine());
 
 		Arrays.sort(arr);
-		for (int i = 0; arr[i] <= x / 2; i++) {
+		for (int i = 0;i< n; i++) {
+			if(arr[i]>x/2)break;
 			int tgt = x - arr[i];
-			System.out.println(arr[i] +" " +tgt);
 			if (tgt > 0) {
 				int lo = 0;
 				int hi = n - 1;
