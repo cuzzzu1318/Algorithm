@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
+/* 아무 생각없이 바이너리서치로 품 ㅎㅎ
+*/
 public class BOJ_3273_두수의합 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
