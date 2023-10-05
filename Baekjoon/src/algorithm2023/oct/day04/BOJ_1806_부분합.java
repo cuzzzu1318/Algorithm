@@ -5,13 +5,13 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class __BOJ_1806_부분합 {
+public class BOJ_1806_부분합 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
 	static StringBuilder sb = new StringBuilder();
 	
-	static int N, S;
-	static long arr[];
+	static int N, S, arr[];
+	static int ans = Integer.MAX_VALUE;
 	
 	public static void main(String[] args) throws Exception{
 		
@@ -22,34 +22,41 @@ public class __BOJ_1806_부분합 {
 		S = Integer.parseInt(st.nextToken());
 		
 		//배열의 길이 초기화
-		arr = new long[N+1];
+		arr = new int[N+1];
 		
+		//입력
 		st = new StringTokenizer(br.readLine());
-		for(int i =1;i<=N;i++) {
+		for(int i =0;i<N;i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		for(int i =1 ;i<=N;i++) {
-			arr[i] = arr[i-1]+arr[i];
+		
+		//투포인터를 위한 왼쪽, 오른쪽 위치 포인터
+		int lo = 0;
+		int hi = 0;
+		
+		//합을 나타내는 수
+		long sum = 0;
+		
+		//투포인터 로직
+		while(lo<=hi) {
+			//합이 S보다 작으면 오른쪽 포인터 증가
+			if(sum<S) {
+				if(hi==N)break;
+				sum+=arr[hi++];
+				//합이 S보다 크면 왼쪽 포인터 증가
+			}else {
+				ans = Math.min(ans, hi-lo);
+				sum-=arr[lo++];
+			}
 		}
-		if(arr[N]<S)System.out.println(0);
-		else System.out.println(getMinLen(1,N));
+		
+		
+		
+		System.out.println(ans==Integer.MAX_VALUE?0:ans);
 		
 	}
 	
-	static int getMinLen(int s, int e) {
-		
-		if(arr[e]-arr[s-1]<S)return e-s+2;
-		
-		if(arr[e-1]-arr[s]>=S) {
-			return getMinLen(s+1, e-1);
-		}else {
-			return Math.min(getMinLen(s+1, e), getMinLen(s, e-1));
-		}
-		
-		
-		
-	}
 	
 	
 }
