@@ -1,4 +1,4 @@
-package algorithm2023.oct.day07;
+package algorithm2023.oct.day09;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
