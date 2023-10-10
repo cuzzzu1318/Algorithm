@@ -1,62 +1,56 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
-//유기농배추
 public class Main {
-
-	static int[] dx = {-1 , 1 , 0 , 0};
-	static int[] dy = { 0,  0 , -1 ,1};
-	static int[][] visited, arr;
-	static int count,x,y;
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int N = Integer.parseInt(br.readLine());
-		for(int t = 0 ; t < N ; t++) {
-			count = 0;
-			StringTokenizer st = new StringTokenizer(br.readLine()," ");
-			
-			 y = Integer.parseInt(st.nextToken()); //열
-			 x = Integer.parseInt(st.nextToken()); //행
-			int k = Integer.parseInt(st.nextToken()); //배추
-			
-			arr = new int[x][y];
-			visited = new int[x][y];
-			for(int i = 0 ; i < k ; i++) {
-				st = new StringTokenizer(br.readLine()," ");
-				int c = Integer.parseInt(st.nextToken());
-				int r = Integer.parseInt(st.nextToken());
-				arr[r][c] = 1;
-			}
-			
-			for(int i = 0 ; i< x ; i++) {
-				for(int j = 0 ; j < y ; j++) {
-					if(arr[i][j]== 1 && visited[i][j] == 0 ) {
-						count++;
-						dfs(i,j);
-					}
-					
-				}
-			}
-			
-			System.out.println(count);
-		}//tc
-	}//main
-	private static void dfs(int cr, int cs) {
-		visited[cr][cs] = 1; //방문 췍
-		int nx ;
-		int ny ;
-		for(int i = 0 ; i < 4; i++) {
-			nx = cr + dx[i];
-			ny = cs + dy[i];
-			if(nx >=0 &&ny >= 0 && nx <x && ny < y && arr[nx][ny]==1) { //경계값 + 연결검사
-				if(visited[nx][ny]==1)continue;
-				dfs(nx,ny);
-			}
-		}
-		
-	}//dfs
-}//class
+    static char[][] table = new char[9][9];
+    static boolean[][][] v = new boolean[9][9][10];
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        for (int i=0; i<9; i++) {
+            table[i] = br.readLine().toCharArray();
+        }
+        int t;
+        for (int i=0; i<9; i++) {
+            for (int j=0; j<9; j++) {
+                if (table[i][j] != '0') {
+                    t = table[i][j] - '0';
+                    for (int k=0; k<9; k++) {
+                        v[k][j][t] = true; v[i][k][t] = true;
+                    }
+                    for (int r=i/3*3; r<i/3+3; r++) {
+                        for (int c=j/3*3; c<j/3+3; c++) v[r][c][t] = true;
+                    }
+                }
+            }
+        }
+        bt();
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<9; i++) sb.append(table[i]).append("\n");
+        System.out.println(sb);
+    }
+    
+    static boolean bt() {
+        for (int i=0; i<9; i++) {
+            for (int j= 0; j<9; j++) {
+                if (table[i][j]=='0') {
+                    for (int k=1; k<10; k++) {
+                        if (v[i][j][k] || !isValid(i, j, (char)(k+'0'))) continue;
+                        table[i][j] = (char) (k+'0');
+                        if (bt()) return true;
+                        table[i][j] = '0';
+                    }
+                }
+                if (table[i][j]=='0') return false;
+            }
+        }
+        return true;
+    }
+    
+    static boolean isValid(int r, int c, char num) {
+        for (int i=0; i<9; i++) if (table[r][i]==num || table[i][c]==num) return false;
+        for (int i=r/3*3; i<r/3+3; i++) {
+            for (int j=c/3*3; j<c/3+3;j++) if (table[i][j]==num) return false;
+        }
+        return true;
+    }
+}
