@@ -1,4 +1,4 @@
-package algorithm2023.oct.day11;
+package algorithm2023.oct.day12;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BOJ_16235_나무재테크 {
@@ -135,22 +136,25 @@ public class BOJ_16235_나무재테크 {
 		}
 	}
 	static void fall() {
+		Queue<Tree> q  =new LinkedList<>();
 		//모든 나무를 순회하며 나이가 5의 배수인지 확인
 		//맞다면 번식
-		for(int i = 0;i<tree.size();i++) {
-			Tree t = tree.get(i);
+		Iterator<Tree> iter = tree.iterator();
+		while(iter.hasNext()) {
+			Tree t = iter.next();
 			if(t.z%5==0) {
 				for(int d= 0;d<8;d++) {
 					int nx = t.x+dx[d];
 					int ny = t.y+dy[d];
 					if(isValid(nx,ny)) {
-						tree.add(0,new Tree(nx,ny,1));
-						i++;
+						q.add(new Tree(nx,ny,1));
 					}
 				}
 			}
 		}
-		
+		while(!q.isEmpty()) {
+			tree.add(q.poll());
+		}
 	}
 	static void winter() {
 		//A배열의 값만큼 map에 값 추가
