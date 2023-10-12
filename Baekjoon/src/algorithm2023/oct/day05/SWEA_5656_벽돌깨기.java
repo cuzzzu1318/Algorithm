@@ -13,7 +13,7 @@ public class SWEA_5656_벽돌깨기 {
 	static StringBuilder sb = new StringBuilder();
 
 	static int N, W, H, map[][],ans;
-	static ArrayList<LinkedList<Integer>> block = new ArrayList<>();
+	static ArrayList<LinkedList<Integer>> block;
 	
 	static int[] dy = {-1,0,1,0};
 	static int[] dx = {0,1,0,-1};
@@ -31,6 +31,7 @@ public class SWEA_5656_벽돌깨기 {
 			N = Integer.parseInt(st.nextToken());
 			W = Integer.parseInt(st.nextToken());
 			H = Integer.parseInt(st.nextToken());
+			block = new ArrayList<>();
 
 			map = new int[H][W];
 
@@ -44,10 +45,21 @@ public class SWEA_5656_벽돌깨기 {
 					map[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
+			
+			for(int i = 0;i<W;i++) {
+				for(int j = H-1;j>=0;j--) {
+					if(map[j][i]>0)block.get(i).add(map[j][i]);
+				}
+				
+			}
+			
+			
+			
 			perm(0);
 
-			System.out.println(ans);
+			sb.append("#").append(t).append(" ").append(ans==Integer.MAX_VALUE?0:ans).append("\n");
 		}
+		System.out.println(sb);
 	}
 
 	static void perm(int idx) {
@@ -62,8 +74,8 @@ public class SWEA_5656_벽돌깨기 {
 				for(int j = 0;j<W;j++) {
 					temp.add((LinkedList<Integer>) block.get(j).clone());
 				}
-				int x = H-block.get(i).size();
-				check(i,x);
+				int y = H-block.get(i).size();
+				check(y,i );
 				remove();
 				perm(idx+1);
 				for(int j = 0;j<W;j++) {
@@ -74,17 +86,21 @@ public class SWEA_5656_벽돌깨기 {
 	}
 	
 	static void check(int y, int x) {
-		int pow = block.get(x).get(y);
-		block.get(x).set(y, -1);
+		int pow = block.get(x).get(H-y-1);
+		block.get(x).set(H-y-1, -1);
+		
 		for(int d = 0;d<4;d++){
+			int ny = y;
+		int nx = x;
 			for(int i = 1;i<pow;i++) {
-				int ny = y+dy[d];
-				int nx = x+dx[d];
+				ny +=dy[d];
+				nx +=dx[d];
+				if(!isValid(ny,nx))continue;
 				if(H-block.get(nx).size()<=ny) {
 					if(block.get(nx).get(H-ny-1)>1) {
 						check(ny,nx);
 					}
-					block.get(nx).set(ny, -1);
+					block.get(nx).set(H-ny-1, -1);
 				}
 			}
 		}
@@ -100,12 +116,15 @@ public class SWEA_5656_벽돌깨기 {
 
 	static int count() {
 		int cnt = 0;
-		for (int i = 0; i < H; i++) {
-			for (int j = 0; j < W; j++) {
-				if (map[i][j] != 0)
-					cnt++;
-			}
+		for(int i = 0;i<W;i++) {
+			cnt+=block.get(i).size();
 		}
 		return cnt;
+	}
+	
+	static void print() {
+		for(int i =0;i<W;i++) {
+			System.out.println(block.get(i));
+		}
 	}
 }
