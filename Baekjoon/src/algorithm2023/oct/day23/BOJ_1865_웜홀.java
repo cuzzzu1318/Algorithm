@@ -1,4 +1,4 @@
-package algorithm2023.oct.day23;
+package algo;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class BOJ_1865_웜홀 {
+public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
 	static StringBuilder sb = new StringBuilder();
@@ -36,6 +36,7 @@ public class BOJ_1865_웜홀 {
 				int e = Integer.parseInt(st.nextToken());
 				int cost = Integer.parseInt(st.nextToken());
 				graph[s][e] = cost;
+				graph[e][s] = cost;
 			}
 
 			for (int i = 0; i < W; i++) {
@@ -62,27 +63,19 @@ public class BOJ_1865_웜홀 {
 		Arrays.fill(dist, INF);
 		dist[start] = 0;
 		for (int next = 1; next <= N; next++) {
-
-			if (dist[next] == INF) continue;
+			boolean isUpdate = false;
 			for (int i = 1; i <= N; i++) {
+					if(dist[next]==INF)continue;
 					if (dist[next] + graph[next][i] < dist[i]) {
+						isUpdate = true;
 						dist[i] = dist[next] + graph[next][i];
 						if (next == N)
-							return false;
+							return true;
 					}
-				
-
 			}
+			if(!isUpdate) break;
 		}
-		System.out.println(start);
-		System.out.println(Arrays.toString(dist));
-
-		for (int i = 1; i <= N; i++) {
-			if (graph[i][start] != INF) {
-				if (dist[i] + graph[i][start] < 0)
-					return true;
-			}
-		}
+		
 		return false;
 	}
 	
