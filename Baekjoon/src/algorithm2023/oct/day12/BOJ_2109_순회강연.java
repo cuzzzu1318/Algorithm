@@ -18,8 +18,6 @@ public class BOJ_2109_순회강연 {
 	public static void main(String[] args) throws Exception {
 		n = Integer.parseInt(br.readLine());
 		
-		int maxD = 0;
-		
 		for(int i =0 ;i<=10000;i++) {
 			lec.add(new ArrayList<>());
 		}
@@ -29,7 +27,6 @@ public class BOJ_2109_순회강연 {
 			int p = Integer.parseInt(st.nextToken());
 			int d = Integer.parseInt(st.nextToken());
 
-			maxD = Math.max(maxD, d);
 			lec.get(d).add(p);
 			
 		}

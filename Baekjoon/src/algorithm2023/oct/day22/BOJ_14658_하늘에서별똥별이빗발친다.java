@@ -5,6 +5,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+
+/*
+ * 별 두개를 골라 y, x 중 더 작은 값 -> 별 두개를 모두 포함하는 좌표를 꼭짓점으로 지정해 계산
+ * 해당 꼭짓점을 기준으로 사분면 두개만 확인
+*/
+
 public class BOJ_14658_하늘에서별똥별이빗발친다 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
@@ -23,36 +29,6 @@ public class BOJ_14658_하늘에서별똥별이빗발친다 {
 			this.x = x;
 			this.y = y;
 		}
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + x;
-			result = prime * result + y;
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Star other = (Star) obj;
-			if (x != other.x)
-				return false;
-			if (y != other.y)
-				return false;
-			return true;
-		}
-
-		@Override
-		public String toString() {
-			return "Star [x=" + x + ", y=" + y + "]\n";
-		}
 		
 		
 		
@@ -65,6 +41,7 @@ public class BOJ_14658_하늘에서별똥별이빗발친다 {
 		L = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());
 		
+		//별 입력
 		for(int i =0;i<K;i++) {
 			st = new StringTokenizer(br.readLine());
 			int x = Integer.parseInt(st.nextToken());
@@ -72,19 +49,26 @@ public class BOJ_14658_하늘에서별똥별이빗발친다 {
 			stars.add(new Star(x,y));
 		}
 		
+		//getAns()는 트램펄린이 튕겨내는 별의 개수를 리턴하므로 바닥에 떨어진 별을 카운트하기 위해 K_getAns()출력
 		System.out.println(K-getAns());
 		
 		
 	}
 	
+	
 	static int getAns() {
+		//최댓값을 구해야 함.
 		int max = 0;
+		//1번 별
 		for(Star s : stars) {
+			//2번 별
 			for(Star s2 : stars) {
+				//두 별을 모두 포함하는 왼쪽 위 꼭짓점을 구하기 위해 math.min 사용
 				int cnt1 = 0;
 				int cnt2 = 0;
 				int x = Math.min(s2.x, s.x);
 				int y = Math.min(s2.y, s.y);
+				//해당 꼭짓점을 기준으로 했을 때 s3을 포함하는지 확인
 				for(Star s3 : stars) {
 					
 					if(s3.x>=x&&s3.x-x<=L) {

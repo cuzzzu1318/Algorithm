@@ -6,6 +6,14 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.StringTokenizer;
+/*
+스택을 사용하여 풀이.
+더 높은 건물을 만날 때 마다 카운트
+큰 건물이 너비가 2이상일 수도 있으니 큰 건물이 남아있다면 모두 pop
+큰 건물을 모두 pop한 후 현재 건물보다 작은 건물이 있다면 카운트 추가
+*/
+
+
 
 public class BOJ_1863_스카이라인쉬운거 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,24 +50,28 @@ public class BOJ_1863_스카이라인쉬운거 {
 			int y = Integer.parseInt(st.nextToken());
 			pos.add(new Pos(x, y));
 		}
-
+		
 		int cnt = 0;
 		stack.add(new Pos(0,0));
 		for (Pos p : pos) {
+			//스택이 비어있다면 -> 처음 건물이라면  스택에 넣고 넘어가기
 			if (stack.isEmpty()) {
 				stack.push(p);
 				continue;
 			}
+			//새로 만난 건물이 이전 건물보다 크다 -> 기존에 없던 건물이므로 cnt++
 			if(p.y>stack.peekFirst().y) {
 				cnt++;
 				stack.push(p);
 				continue;
 			}
 			
+			//새로 만난 건물보다 큰 건물들이 스택에 들어있다 -> 이미 카운트한 건물을 다 지나온 경우이므로 스택에서 모두 빼 줌.
 			while (!stack.isEmpty() && stack.getFirst().y > p.y) {
 				stack.pop();
 			}
 
+			//큰 건물을 뺐더니 더 작은 건물이 남아 있다면 새로 만난 건물도 새로운 건물이므로 cnt++;
 			if(!stack.isEmpty()&&stack.getFirst().y<p.y) {
 				cnt++;
 			}
