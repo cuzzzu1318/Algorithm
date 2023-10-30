@@ -17,6 +17,8 @@ public class BOJ_1937_욕심쟁이판다 {
 	static int[] dy = {-1,0,1,0};
 	static int[] dx = {0,1,0,-1};
 	
+	static boolean[][] v;
+	
 	static class Pos{
 		int y, x;
 
@@ -53,33 +55,28 @@ public class BOJ_1937_욕심쟁이판다 {
 		}
 		
 		int max =0;
+		v = new boolean[n][n];
 		
 		for(int i =0;i<n;i++) {
 			for(int j = 0;j<n;j++) {
-				if(dp[i][j] != -1)continue;
-				Queue<Pos> q = new LinkedList<>();
-				q.add(new Pos(i,j));
-				while(!q.isEmpty()) {
-					Pos cur = q.poll();
-					dp[cur.y][cur.x]=1;
-					for(int d= 0;d<4;d++) {
-						int ny = cur.y+dy[d];
-						int nx = cur.x+dx[d];
-						if(!isValid(ny,nx)||map[ny][nx]<=map[cur.y][cur.x])continue;
-						if(dp[ny][nx]!=-1) {
-							dp[cur.y][cur.x]+=dp[ny][nx];
-						}else {
-							q.add(new Pos(ny,nx));
-							dp[cur.y][cur.x]++; 
-						}
-						max = Math.max(max, dp[cur.y][cur.x]);
-					}
-				}
+				
 			}
 		}
 		print();
 		System.out.println(max);
 		
+	}
+	
+	static void dfs(int y, int x) {
+		int cnt =0;
+		
+		for(int d = 0;d<4;d++) {
+			int ny = y+dy[d];
+			int nx = x+dx[d];
+			
+			if(!isValid(ny,nx))continue;
+			
+		}
 	}
 	
 	static void print() {
