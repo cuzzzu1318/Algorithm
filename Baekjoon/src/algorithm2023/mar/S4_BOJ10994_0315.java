@@ -1,12 +1,5 @@
 package algorithm2023.mar;
 
-/* �����
- * ���̵� : �ǹ� 4
- * ���̵��: ��� 
- * ��� �ȿ��� depth��ŭ ����ִ°� �� �������
- * �ð����⵵:
- * �ҿ� �ð�: 15:33~ 17:18( 1h 45 )
- * */
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

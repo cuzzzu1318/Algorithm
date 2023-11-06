@@ -1,13 +1,5 @@
 package algorithm2023.mar;
 
-/*  ������ ���� �ٲ��ֱ�
- * 	Java�� �ܾ�ٲ𶧸��� �빮��, C�� �ܾ �ٲ� �����
- * 	�Ѵ� �ƴϸ� Error! ���
- * ���̵� : �ǹ� 3
- * ���̵��: �ܼ��� �ٲ���µ� �������� Error�� ����.
- * �ð����⵵:
- * �ҿ� �ð�:	15�� 
- * */
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,15 +1,5 @@
 package algorithm2023.mar;
 
-/*  X�� ��, .�� �ٴ�
- * 50���� ������ 3�� �̻��� �ٴ��� ���� ���� ���. ���� �Ѿ ���� �ٴ�.
- * 50���Ŀ� ������ ����϶�. �� ���� ��� ����ϴ� �ּ����� ���簢��
- * ���̵� : �ǹ� 2
- * ���̵��: ���⺤�� �̿�. ������ �Ѿ�� ī��Ʈ �ǵ���.
- * 			���� x,y�� �ִ� �ּ� ���ؼ� ������ ���.
- * �ð����⵵:
- * �ҿ� �ð�: 21:20~21:35 (15min)
- * */
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class S2_BOJ5212_0321 {
+public class BOJ_5212_지구온난화 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int R;
