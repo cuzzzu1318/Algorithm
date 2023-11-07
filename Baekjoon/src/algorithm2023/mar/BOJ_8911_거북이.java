@@ -1,18 +1,5 @@
 package algorithm2023.mar;
 
-/*  2���� ��� ������ �ź��̰� ������ ���� ����.
- * 	��ɾ� set
- * 	F: �� ���� ������
- * 	B: �� ���� �ڷ�
- * 	L: �������� 90�� ȸ��
- * 	R: ���������� 90�� ȸ��
- * ���̵� : �ǹ� 3
- * ���̵��: �̵��ߴ� x, y �ּ�, �ִ� �̿��ؼ� ���� ����.
- * 			������ �� direction�� �ʱ�ȭ �߸��ؼ� �����ɸ�!
- * �ð����⵵:
- * �ҿ� �ð�: 11:20~11:58(38min)
- * */
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -20,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-public class S3_BOJ8911_0321 {
+public class BOJ_8911_거북이 {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int N;
