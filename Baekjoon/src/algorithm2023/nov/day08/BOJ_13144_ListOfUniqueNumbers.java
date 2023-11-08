@@ -1,10 +1,11 @@
+package algorithm2023.nov.day08;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BOJ_13144_ListOfUniqueNumbers {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
 	static StringBuilder sb = new StringBuilder();
