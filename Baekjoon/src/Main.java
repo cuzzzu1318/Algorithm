@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -8,43 +9,37 @@ public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
 	static StringBuilder sb = new StringBuilder();
-	static int[] arr;
-	static Queue<Integer> q = new LinkedList<>();
+	
+	static int N,a,b;
 
 	public static void main(String[] args) throws Exception {
-		int N = Integer.parseInt(br.readLine());
-		arr = new int[N];
-		boolean[] v = new boolean[100001];
 		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < N; i++) {
-			int n = Integer.parseInt(st.nextToken());
-			arr[i] = n;
-		}
-		int idx = 0;
-		v[arr[idx]] = true;
-		q.add(arr[idx++]);
-		long ans = 0;
-		while (idx < N) {
-			int n = arr[idx++];
-			if (v[n]) {
-				ans += q.size();
-				while (q.peek() != n) {
-					v[q.peek()] = false;
-					q.poll();
-					ans += q.size();
+		N = Integer.parseInt(st.nextToken());
+		a = Integer.parseInt(st.nextToken());
+		b = Integer.parseInt(st.nextToken());
+		
+		boolean flag = true;
+		int[] arr = new int[N+1];
+		if(a+b<=N+1) {
+			flag = false;
+			int h = 1;
+			for(int i =1 ;i<=N;i++) {
+				if(i<=N-b-a+1) {
+					arr[i] = h;
+				}else if(i<=N-b+1) {
+					arr[i] = ++h;
+				}else {
+					arr[i]=--h;
 				}
-				q.poll();
 			}
-			v[n] = true;
-			q.offer(n);
-
 		}
-		while(!q.isEmpty()) {
-			ans+=q.size();
-			q.poll();
+		if(flag) {
+			System.out.println(-1);
+		}else {
+			for(int i =1;i<=N;i++) {
+				System.out.print(arr[i]+" ");
+			}
 		}
-		System.out.println(ans);
-
 	}
 
 }
