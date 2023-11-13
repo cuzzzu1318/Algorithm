@@ -22,17 +22,12 @@ public class Main {
 		int[] arr = new int[N+1];
 		if(a+b<=N+1) {
 			flag = false;
-			int h = 1;
-			for(int i =1 ;i<=N;i++) {
-				if(i<=N-b-a+1) {
-					arr[i] = h;
-				}else if(i<=N-b+1) {
-					arr[i] = ++h;
-				}else {
-					arr[i]=--h;
-				}
-			}
+			
 		}
+		
+		
+		
+		
 		if(flag) {
 			System.out.println(-1);
 		}else {
