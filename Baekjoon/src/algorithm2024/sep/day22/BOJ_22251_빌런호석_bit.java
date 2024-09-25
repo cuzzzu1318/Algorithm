@@ -2,7 +2,6 @@ package algorithm2024.sep.day22;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class BOJ_22251_빌런호석_bit {
